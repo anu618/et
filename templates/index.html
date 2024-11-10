@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Topics Processor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Exam Topics Practice Platform</h1>
+        
+        <div class="section quiz-section">
+            <h2>Practice Quiz</h2>
+            <p class="info">Test your knowledge with interactive questions:</p>
+            <div id="quiz-container" style="display: none;">
+                <div id="question-display">
+                    <h3 id="question-number"></h3>
+                    <p id="question-text"></p>
+                    <div id="options-container"></div>
+                    <div id="feedback-message" class="feedback-message"></div>
+                </div>
+                <div id="quiz-controls">
+                    <button id="prevBtn" onclick="previousQuestion()">Previous</button>
+                    <button id="checkBtn" onclick="checkAnswer()">Check Answer</button>
+                    <button id="nextBtn" onclick="nextQuestion()">Next</button>
+                </div>
+                <div id="quiz-progress">
+                    <p>Progress: <span id="progress-text">0/0</span></p>
+                    <p>Score: <span id="score-text">0</span></p>
+                </div>
+            </div>
+            <div class="quiz-buttons">
+                <button id="startQuizBtn" onclick="startQuiz()">Start New Quiz</button>
+                <button id="exportBtn" onclick="exportWrongAnswers()" class="export-btn" style="display: none;">
+                    Export Wrong Answers
+                </button>
+            </div>
+        </div>
+
+        <div class="section admin-toggle">
+            <button id="toggleAdminBtn" onclick="toggleAdmin()">Show/Hide Admin Section</button>
+        </div>
+
+        <div class="admin-section" id="adminSection" style="display: none;">
+            <h2>Admin Section</h2>
+            
+            <div class="section">
+                <h3>Instructions</h3>
+                <ul class="instructions">
+                    <li><strong>Input Files:</strong> Place your text files in the <code>inputs</code> folder for processing</li>
+                    <li><strong>Generated Documents:</strong> Find your processed documents in the <code>out_docs</code> folder</li>
+                    <li><strong>Scraped Content:</strong> When using the scraper, content will be saved to <code>out_rawtxt</code> folder</li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h3>Scrape Content</h3>
+                <p class="info">Enter an ExamTopics URL to download question content automatically. The scraped content will be saved as a text file in the <code>out_rawtxt</code> folder.</p>
+                <form id="scrapeForm">
+                    <input type="text" id="url" placeholder="Enter ExamTopics URL">
+                    <button type="submit">Scrape Content</button>
+                </form>
+            </div>
+
+            <div class="section">
+                <h3>Process Files</h3>
+                <p class="info">Click this button to process all text files from the <code>inputs</code> folder. This will:</p>
+                <ul class="process-info">
+                    <li>Clean up formatting and special characters</li>
+                    <li>Generate two versions of documents:
+                        <ul>
+                            <li>Practice version (questions only)</li>
+                            <li>Answer key version (with correct answers and most voted answers)</li>
+                        </ul>
+                    </li>
+                    <li>Save the processed documents in the <code>out_docs</code> folder</li>
+                </ul>
+                <button id="cleanBtn">Clean & Process Files</button>
+            </div>
+
+            <div class="section">
+                <h3>Download Documents</h3>
+                <p class="info">Download the processed documents in DOCX format:</p>
+                <div class="doc-buttons">
+                    <button onclick="generateAndDownload('practice')">Generate Practice Questions</button>
+                    <button onclick="generateAndDownload('answers')">Generate Questions with Answers</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/quiz.css') }}">
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="quiz-header">
+            <h1>Interactive Quiz</h1>
+            <div id="progress"></div>
+        </div>
+        
+        <div id="question-container">
+            <div id="question"></div>
+            <div id="answer-feedback" class="answer-feedback" style="display: none;">
+                <span id="feedback-text"></span>
+            </div>
+            <div id="options"></div>
+        </div>
+        
+        <div id="controls">
+            <button id="prevBtn">Previous</button>
+            <button id="nextBtn">Next</button>
+            <button id="submitBtn" style="display: none;">Submit Quiz</button>
+        </div>
+        
+        <div id="results" style="display: none;">
+            <h2>Quiz Results</h2>
+            <div id="score"></div>
+            <div id="review"></div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/quiz.js') }}"></script>
+</body>
+</html>
